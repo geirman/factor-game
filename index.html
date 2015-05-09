@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional??EN">
+<HTML><HEAD><TITLE>Factor Game 1.0</TITLE>
+
+<SCRIPT src="imgs_n_arrays.js"></SCRIPT>
+<SCRIPT language="javascript"><!--
+//****************************************
+// Author: Chris Geirman (geirman@bigfoot.com)
+// Creation Date: Sept. 29, 2000
+// Purpose: To help my daughter learn her factors
+//****************************************
+// SetUp Game
+function factorsAvail(num){
+
+	factors = eval('f' + num);
+
+	for(var i = 0; i < factors.length; i++){
+		if(!taken[factors[i]]){
+			// A factor of the selected number has
+			// not been taken, so the selected number
+			// can be played.
+			return true;
+		}
+	}
+	// All the factors of the selected number have
+	// been taken, so don't allow the user to choose
+	// that number.
+	return false;
+}
+
+
+var ActivePlayer = "green"
+var Opponent = "red"
+function scoreIt(numSelected){
+	n = numSelected
+	if(!taken[n] && factorsAvail(n)){
+		document.images['img' + n].src = eval(ActivePlayer + '_' + n + '.src');
+		taken[n] = true;
+		currentScore = parseInt(document.forms[0].elements[ActivePlayer + "_score"].value)
+		document.forms[0].elements[ActivePlayer + "_score"].value = currentScore + n;
+	}else{
+		alert("This number is no longer available.");
+		return false;
+	}
+
+	factors = eval('f' + n);
+	for(var i = 0; i < factors.length; i++){
+		FactorTaken = taken[factors[i]];
+		if(!FactorTaken){
+			document.images['img' + factors[i]].src = eval(Opponent + '_' + factors[i] + '.src');
+			taken[factors[i]] = true;
+			currentScore = parseInt(document.forms[0].elements[Opponent + "_score"].value)
+			document.forms[0].elements[Opponent + "_score"].value = currentScore + factors[i];
+		}
+	}
+	// Find out if the game is over, and display the score if it is
+	if(gameIsOver()){
+		alert("Game Over")
+	}else{
+		// continue to play
+		swapPlayers();
+	}
+}
+
+function swapPlayers(){
+	if(ActivePlayer == "green"){
+		ActivePlayer = "red";
+		Opponent = "green";
+		document.images['player1'].src = player1_off.src;
+		document.images['player2'].src = player2_on.src;
+	}else{
+		ActivePlayer = "green";
+		Opponent = "red";
+		document.images['player1'].src = player1_on.src;
+		document.images['player2'].src = player2_off.src;
+	}
+}
+function gameIsOver(){
+	for(var n = 1; n <= 30; n++){
+		if(!taken[n] && factorsAvail(n)){
+			return false;
+		}
+	}
+	return true;
+}
+
+function ResetAll(f){
+	for(var i = 0; i < taken.length; i++){
+		taken[i] = false;
+	}
+	for(var i = 1; i <= 30; i++){
+		document.images["img" + i].src = eval("blank_" + i + ".src")
+	}
+
+	f.green_score.value = 0
+	f.red_score.value = 0
+	ActivePlayer = "red"
+	swapPlayers();
+}
+
+var Instructions
+function popInstructions(){
+    if(!Instructions || Instructions.closed ){
+            Instructions = open("instructions.html", "newWindow" , "HEIGHT=400,WIDTH=300,scrollbars,status,resizable");
+         return;
+    }else{
+        Instructions.focus();
+    }
+}
+//--></SCRIPT>
+
+
+</HEAD>
+<BODY>
+
+<!-- Interface is 553 x 399 -->
+<form name="scoreboard">
+<!-- ImageReady Slices (interface.psd) -->
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+	<tr>
+		<td colspan=3><img src="images/fg_north.jpg" width=553 height=46></td>
+		<td><img src="images/spacer.gif" width=1 height=46></td>
+	</tr>
+	<tr>
+		<td><img src="images/fg_north-03.jpg" width=58 height=2></td>
+		<td rowspan=7>
+			<!-- Insert Gameboard Here -->
+			<table border=0 cellspacing=0 cellpadding=0>
+				<SCRIPT language="javascript"><!--
+				// Paint Gameboard: START
+
+				// Initialize Variables
+				var gameboard = ""
+				var intImage = 1
+
+				// painting 5 rows of images
+				for(var tr = 1; tr <= 5; tr++){
+					gameboard += "<tr>"
+					for(var td = 1; td <= 6; td++){
+						gameboard += "<td><a href=\"#\" onclick=\"scoreIt(" + intImage + ")\">"
+						gameboard += "<image src=\"images/" + intImage + ".gif\" border=0 name=\"img" + intImage +"\" width=50 height=50 alt=\"" + intImage + "\"></a></td>"
+						intImage++
+					}
+					gameboard += "</tr>"
+				}
+
+				// And finally, output the result
+				document.write(gameboard)
+
+				// Paint Gameboard: END
+				//--></SCRIPT>
+			</table>
+			<!-- End Gameboard -->
+		</td>
+		<td><img src="images/fg_north-04.jpg" width=195 height=2></td>
+		<td><img src="images/spacer.gif" width=1 height=2></td>
+	</tr>
+	<tr>
+		<td rowspan=5 background="images/fg_west_bg.jpg"><img src="images/fg_west.jpg" width=58 height=249></td>
+		<td><img src="images/fg_east1_player1on.jpg" name="player1" width=195 height=30></td>
+		<td><img src="images/spacer.gif" width=1 height=30></td>
+	</tr>
+	<tr>
+		<td background="images/fg_east2.jpg"><img src="images/spacer.gif" width=100 height=24><input type="text" name="green_score" size=3 value=0 onfocus="this.blur()"></td>
+		<td><img src="images/spacer.gif" width=1 height=23></td>
+	</tr>
+	<tr>
+		<td><img src="images/fg_east3_player2.jpg" name="player2" width=195 height=37></td>
+		<td><img src="images/spacer.gif" width=1 height=37></td>
+	</tr>
+	<tr>
+		<td background="images/fg_east4.jpg"><img src="images/spacer.gif" width=100 height=24><input type="text" name="red_score" size=3 value=0 onfocus="this.blur()"></td>
+		<td><img src="images/spacer.gif" width=1 height=23></td>
+	</tr>
+	<tr>
+		<td><img src="images/fg_east5.jpg" width=195 height=136></td>
+		<td><img src="images/spacer.gif" width=1 height=136></td>
+	</tr>
+	<tr>
+		<td rowspan=2><img src="images/fg_south.jpg" width=58 height=102></td>
+		<td rowspan=2><img src="images/fg_east6.jpg" width=195 height=102 border=0 usemap="#controls"></td>
+		<td><img src="images/spacer.gif" width=1 height=2></td>
+	</tr>
+	<tr>
+		<td><img src="images/fg_south-13.jpg" width=300 height=100></td>
+		<td><img src="images/spacer.gif" width=1 height=100></td>
+	</tr>
+	<tr>
+		<td colspan=2 align=center>
+			<font face="verdana,helvetica,arial" size="-1">
+			Player 1 = <font color="green"><b>Green</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Player 2 = <font color="red"><b>Red</b></font></font><p>
+			<font face="verdana,helvetica,arial" size="-1">
+			©2001 geirman.com. All rights reserved.</font>
+		</td>
+	</tr>
+</table>
+<!-- Image map supports the fg_east6 image -->
+<map name="controls">
+	<area shape="rect" alt="Instructions" coords="30,20,195,40" href="javascript:popInstructions()">
+	<area shape="rect" alt="Reset" coords="30,40,195,60" href="javascript:ResetAll(document.forms[0])"></map>
+<!-- End ImageReady Slices -->
+
+
+</form>
+
+
+</BODY>
+</HTML>
