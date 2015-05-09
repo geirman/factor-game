@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Factor Game 2.0</title>
+		<link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="js/jquery.animate-colors.js"></script>
+		<script type="text/javascript" src="js/factorgame.js"></script>	
+</head>
+<body>
+	<div class="container">
+		<div class="row showgrid">
+			<h1>Factors Game 2.0</h1>
+			<div class="col col-main">
+				<table id="game_board">
+					<tr><td></td></tr>
+				</table>
+			</div> <!-- end col-main -->
+
+			<div class="col col-side">
+				<div id="control-wrapper">
+					<label for="board-size">Board Size:</label>
+					<select id="board-size">
+						<option value="100">10x</option>
+						<option value="121">11x</option>
+						<option value="144">12x</option>
+						<option value="169">13x</option>
+						<option value="196">14x</option>
+						<option value="225">15x</option>
+					</select>
+					<button id="reset">Reset</button>
+
+					<ol id="players">
+						<li>Player 1 <span id="s1">&nbsp;</span></li>
+						<li>Player 2 <span id="s2">&nbsp;</span></li>
+					</ol>
+
+				</div>
+			</div><!-- end col-side -->
+		</div> <!-- end row -->
+		<div class="row">
+			<div class="col">
+				<h3>Rules!</h3>
+				<p>Ah, and there's always rules. Fortunately for you, these are easy</p>
+				<ul>
+					<li>Two player game</li>
+					<li>Each player takes turns choosing an uncolored number and is awarded the number of points shown on that button, but giving away all available (uncolored) factors of that number to their opponent.</li>
+					<li>Choosing a number that is already colored or which has no available factors causes that player to forfiet their turn</li>
+					<li>The player with the most points at the end, wins</li>
+					<li>Simple!</li>
+				</ul>
+			</div>
+		</div>
+	</div><!-- end container -->
+</body>
+</html>
