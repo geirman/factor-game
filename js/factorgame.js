@@ -4,17 +4,19 @@
 	version: 3.0
 	date: 8/21/2013
 
-	Enhancements Needed: 
+	TODOS
 	- search for "CG" to find inline comments
-	9/6 - animateScores() doesn't animate, so figure that out.
-	9/9- add controls to reset the board (function exists, but isn't yet used)
-	9/9- add controls to change board size
 	- allow users to change "Player #" to their real name
-	9/8- notify when there are no more moves (game over)
-	9/8- when game is over, provide performance statistics
-	- add rules, perhaps as a sliding drawer from the bottom of gameboard.
+
+	TODOS COMPLETED
+	9/6 - animateScores() doesn't animate, so figure that out.
+	9/9 - add controls to reset the board (function exists, but isn't yet used)
+	9/9 - add controls to change board size
+	9/8 - notify when there are no more moves (game over)
+	9/8 - when game is over, provide performance statistics
 	9/3 - highlight the "taken" and "given" scores in the log so that they correspond to who received the points.
-	9/10- overload the log function such that I can pass just one argument, the log message. Use this whenever a user forfeits his turn and when game is initialized.
+	9/10 - overload the log function such that I can pass just one argument, the log message. Use this whenever a user forfeits his turn and when game is initialized.
+	?? - add rules, perhaps as a sliding drawer from the bottom of gameboard.
 
 	BUGS:
 	- if "reset" is hit or board is resized before all animations have complete, they continue regardless. (reduced setTimeout from 300ms to 100ms, mitigates well)
