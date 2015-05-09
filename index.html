@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Factors Game v3.0</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/factorgame.js"></script>	
+	</head>
+	<body>
+		<div class="container">
+			<section id="rules-tray">
+				<div id="rules-tab">Rules</div>
+
+				<blockquote>
+					<h2>fac&#8226;tor <span>/fakter/</span></h2>
+					<p>1. a number or quantity that when multiplied with another produces a given number or expression.</p>
+				</blockquote>
+				<ul>
+					<li>Play alternates between players</li>
+					<li>Each player chooses a number. To be a valid choice, that number must not have previously been played and have available (unplayed) factors.</li>
+					<li>Player making the selection receives the number of points equal to their selection, but gives away the total points of all available (unplayed) factors of the chosen number.</li>
+					<li>Player with the most points at the end, wins!</li>
+				</ul>
+			</section>
+			<h1>Factors Game 3.0</h1>
+			<h2>Players receive points for numbers taken, but give away all it's availalbe factors.</h2>
+			<div class="row">
+				<div class="span8">
+					<table cellspacing="3" id="gameboard"></table>
+				</div>
+				
+				<div class="span4" id="scores">
+					<h3>Score Board</h3>
+					<ol id="players">
+						<li class="selected">Player 1 <span id="s0">0</span></li>
+						<li>Player 2 <span id="s1">0</span></li>
+					</ol>
+					<div class="btn-group pull-right">
+						<button id="btn-decriment" class="btn btn-inverse btn-small">-</button>
+						<button id="btn-reset" class="btn btn-inverse btn-small">Reset</button>
+						<button id="btn-increment" class="btn btn-inverse btn-small">+</button>
+					</div>
+					<h4>Activity Log</h4>
+					<ol id="log"></ol>					
+				</div>
+			</div>
+		<div>
+		<div id="modal"><div>
+			<h1>Game Over!</h1>
+			<h2>Player 1 </h2>
+				<ul>
+					<li>Points Taken: <span id="p1_taken"></span></li>
+					<li>Points Given: <span id="p1_given"</span></li>
+				</ul>
+			<h2>Player 2</h2>
+				<ul>
+					<li>Points Taken: <span id="p2_taken"></span></li>
+					<li>Points Given: <span id="p2_given"></span></li>
+				</ul>
+
+			<a href="#close" class="close">X</a>
+		</div></div>
+	</body>
+</html>
